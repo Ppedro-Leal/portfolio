@@ -1,84 +1,81 @@
 "use client";
 
-import { NavLink } from "./NavLink";
-import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import VisualModeSwitcher from "@/components/visual-mode/VisualModeSwitcher";
 
-const Navigation = () => {
+const navLinks = [
+  { href: "#projetos", label: "Projetos" },
+  { href: "#experiencia", label: "Experiência" },
+  { href: "#sobre", label: "Sobre" },
+  { href: "#contato", label: "Contato" },
+];
+
+export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks = [
-    { href: "/", label: "Início" },
-    { href: "/sobre", label: "Sobre" },
-    { href: "/formacao", label: "Formação" },
-    { href: "/experiencia", label: "Experiência" },
-    { href: "/projetos", label: "Projetos" },
-    { href: "/contato", label: "Contato" },
-  ];
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <NavLink 
-            href="/" 
-            className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-          >
-            Pedro Leal
-          </NavLink>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/90 backdrop-blur-md">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
+        <a
+          href="#inicio"
+          className="font-display text-lg font-semibold tracking-[-0.03em] text-foreground"
+        >
+          Pedro Leal
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+        <nav className="hidden items-center gap-8 md:flex">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-muted-foreground transition hover:text-primary"
+            >
+              {link.label}
+            </a>
+          ))}
+
+          <div className="ml-2 flex items-center gap-4 border-l border-border pl-6">
+            <VisualModeSwitcher />
+
+            <span className="text-xs font-semibold text-muted-foreground">
+              PT
+            </span>
+          </div>
+        </nav>
+
+        <button
+          type="button"
+          onClick={() => setIsOpen((current) => !current)}
+          className="inline-flex h-10 w-10 items-center justify-center border border-border md:hidden"
+          aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={isOpen}
+        >
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      {isOpen && (
+        <nav className="border-t border-border bg-background px-6 py-6 md:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col gap-5">
             {navLinks.map((link) => (
-              <NavLink
+              <a
                 key={link.href}
                 href={link.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300 relative group"
-                activeClassName="text-primary font-semibold"
+                onClick={() => setIsOpen(false)}
+                className="font-display text-2xl font-medium"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-              </NavLink>
+              </a>
             ))}
-            <ThemeToggle />
-          </div>
+            <VisualModeSwitcher />
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-2">
-            <ThemeToggle />
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-foreground hover:text-primary transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <span className="mt-2 text-xs font-semibold text-muted-foreground">
+              PT
+            </span>
           </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden py-4 border-t border-border/50">
-            <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <NavLink
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-foreground/80 hover:text-primary transition-colors duration-300 py-2"
-                  activeClassName="text-primary font-semibold"
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
+        </nav>
+      )}
+    </header>
   );
-};
-
-export default Navigation;
+}

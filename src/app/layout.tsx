@@ -1,26 +1,37 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Inter, Sora } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "sonner";
+import { VisualModeProvider } from "@/context/VisualModeContext";
 
-const poppins = Poppins({ 
-  weight: ['400', '600', '700'],
+const inter = Inter({
   subsets: ["latin"],
-  display: 'swap',
-  variable: '--font-poppins',
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const sora = Sora({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sora",
 });
 
 export const metadata: Metadata = {
-  title: "Pedro Leal - Portfólio",
-  description: "Portfólio profissional de Pedro Leal - Desenvolvedor Full Stack",
-  keywords: ["Pedro Leal", "Desenvolvedor", "Full Stack", "Portfólio", "React", "Next.js"],
+  title: "Pedro Leal | Desenvolvedor Full Stack",
+  description:
+    "Portfólio de Pedro Leal, Desenvolvedor Full Stack com foco em React, Next.js, Node.js e TypeScript.",
+  keywords: [
+    "Pedro Leal",
+    "Desenvolvedor Full Stack",
+    "React",
+    "Next.js",
+    "Node.js",
+    "TypeScript",
+  ],
   authors: [{ name: "Pedro Leal" }],
   openGraph: {
-    title: "Pedro Leal - Portfólio",
-    description: "Portfólio profissional de Pedro Leal",
+    title: "Pedro Leal | Desenvolvedor Full Stack",
+    description:
+      "Desenvolvimento web com React, Next.js, Node.js e TypeScript.",
     type: "website",
     locale: "pt_BR",
   },
@@ -32,23 +43,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
-      <body 
-        className={`${poppins.variable} font-sans antialiased`}
-        suppressHydrationWarning
+    <html lang="pt-BR">
+      <body
+        className={`${inter.variable} ${sora.variable} min-h-screen antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TooltipProvider delayDuration={300}>
-            {children}
-            <Toaster />
-            <Sonner />
-          </TooltipProvider>
-        </ThemeProvider>
+        <VisualModeProvider>{children}</VisualModeProvider>
       </body>
     </html>
   );

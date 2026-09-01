@@ -1,0 +1,1 @@
+export type VisualMode = "base" | "noir" | "illustrated";
