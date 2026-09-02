@@ -1,9 +1,13 @@
+import "./globals.css";
+
+import "../styles/visual-modes/noir.css";
+import "../styles/visual-modes/illustrated.css";
+import "../styles/visual-modes/transition.css";
+
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter, Oswald, Sora } from "next/font/google";
 import { VisualModeProvider } from "@/context/VisualModeContext";
-import "./globals.css";
-import "../styles/visual-modes/noir.css";
-import "../styles/visual-modes/illustrated.css";
+import VisualTransition from "@/components/visual-mode/VisualTransition";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -61,7 +65,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${sora.variable} ${oswald.variable} ${bricolage.variable} min-h-screen antialiased`}
       >
-        <VisualModeProvider>{children}</VisualModeProvider>
+        <VisualModeProvider>
+          {children}
+          <VisualTransition />
+        </VisualModeProvider>
       </body>
     </html>
   );

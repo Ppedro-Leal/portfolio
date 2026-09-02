@@ -22,28 +22,33 @@ const modes: {
 ];
 
 export default function VisualModeSwitcher() {
-  const { mode, setMode } = useVisualMode();
+  const { mode, pendingMode, isTransitioning, requestMode } = useVisualMode();
 
   return (
-    <div
-      className="flex items-center gap-1"
-      aria-label="Modo visual"
-    >
+    <div className="flex items-center gap-1" aria-label="Modo visual">
       {modes.map((item) => {
-        const isActive = mode === item.id;
+        const isActive = mode === item.id && !pendingMode;
+
+        const isPending = pendingMode === item.id;
 
         return (
           <button
             key={item.id}
             type="button"
-            onClick={() => setMode(item.id)}
+            onClick={() => requestMode(item.id)}
             aria-label={`Modo visual ${item.label}`}
-            aria-pressed={isActive}
+            aria-pressed={isActive || isPending}
+            disabled={isTransitioning}
             className={`
-              flex h-8 min-w-8 items-center justify-center
-              border text-[11px] font-semibold transition
+              flex h-8 min-w-8
+              items-center justify-center
+              border
+              text-[11px]
+              font-semibold
+              transition
+              disabled:cursor-default
               ${
-                isActive
+                isActive || isPending
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border text-muted-foreground hover:border-primary hover:text-foreground"
               }
