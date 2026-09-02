@@ -7,22 +7,20 @@ import { cn } from "@/lib/utils";
 
 interface NavLinkProps extends React.ComponentPropsWithoutRef<typeof Link> {
   activeClassName?: string;
-  pendingClassName?: string;
 }
 
 const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
-  ({ className, activeClassName, pendingClassName, href, ...props }, ref) => {
+  ({ className, activeClassName, href, ...props }, ref) => {
     const pathname = usePathname();
-    const isActive = pathname === href || (href !== "/" && pathname.startsWith(href as string));
+    const isActive =
+      pathname === href ||
+      (href !== "/" && pathname.startsWith(href as string));
 
     return (
       <Link
         ref={ref}
         href={href}
-        className={cn(
-          className,
-          isActive && activeClassName
-        )}
+        className={cn(className, isActive && activeClassName)}
         {...props}
       />
     );

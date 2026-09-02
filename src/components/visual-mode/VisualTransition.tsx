@@ -5,8 +5,6 @@ import { useVisualMode } from "@/context/VisualModeContext";
 export default function VisualTransition() {
   const { transitionPhase, pendingMode } = useVisualMode();
 
-  const isVisible = transitionPhase !== "idle";
-
   return (
     <div
       className="visual-transition"

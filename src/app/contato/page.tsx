@@ -8,10 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Send, Facebook, Instagram, Linkedin, Github } from "lucide-react";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
 
 export default function Contact() {
-  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,12 +19,6 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simulate form submission
-    toast({
-      title: "Mensagem enviada com sucesso!",
-      description: "Obrigado pelo contato. Responderei em breve.",
-    });
-
     // Reset form
     setFormData({ name: "", email: "", message: "" });
   };
