@@ -31,7 +31,7 @@ export default function ProjectsSection() {
           {projects.map((project) => (
             <article
               key={project.id}
-              className="group grid gap-8 py-10 md:grid-cols-[90px_1fr] lg:grid-cols-[110px_1fr_0.7fr] lg:items-start lg:gap-10"
+              className="project-row group grid gap-8 py-10 md:grid-cols-[90px_1fr] lg:grid-cols-[110px_1fr_0.7fr] lg:items-start lg:gap-10"
             >
               <span className="font-display text-3xl font-medium text-secondary-foreground/25">
                 {String(project.id).padStart(2, "0")}

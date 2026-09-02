@@ -48,7 +48,7 @@ export default function AboutSection() {
               e SQL Server.
             </p>
 
-            <p className="border-l-2 border-primary pl-6 text-foreground/85">
+            <p className="about-highlight border-l-2 border-primary pl-6 text-foreground/85">
               Gosto de entender como diferentes partes de uma aplicação se
               conectam e de encontrar soluções para problemas que exigem
               investigação, lógica e construção.

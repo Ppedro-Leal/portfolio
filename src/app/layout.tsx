@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Sora } from "next/font/google";
-import "./globals.css";
+import { Bricolage_Grotesque, Inter, Oswald, Sora } from "next/font/google";
 import { VisualModeProvider } from "@/context/VisualModeContext";
+import "./globals.css";
+import "../styles/visual-modes/noir.css";
+import "../styles/visual-modes/illustrated.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,6 +15,18 @@ const sora = Sora({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sora",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-oswald",
+});
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-bricolage",
 });
 
 export const metadata: Metadata = {
@@ -45,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${inter.variable} ${sora.variable} min-h-screen antialiased`}
+        className={`${inter.variable} ${sora.variable} ${oswald.variable} ${bricolage.variable} min-h-screen antialiased`}
       >
         <VisualModeProvider>{children}</VisualModeProvider>
       </body>

@@ -37,7 +37,7 @@ export default function SkillsSection() {
                 {skills.main.map((skill) => (
                   <span
                     key={skill}
-                    className="font-display text-2xl font-medium tracking-[-0.03em] text-foreground sm:text-3xl"
+                    className="main-skill font-display text-2xl font-medium tracking-[-0.03em] text-foreground sm:text-3xl"
                   >
                     {skill}
                   </span>

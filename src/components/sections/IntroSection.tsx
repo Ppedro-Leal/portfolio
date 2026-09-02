@@ -27,9 +27,9 @@ export default function IntroSection() {
       className="relative flex min-h-[calc(100vh-80px)] items-center pt-20"
     >
       <div className="mx-auto w-full max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
-        <div className="grid items-center gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+        <div className="intro-grid grid items-center gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           {/* Foto */}
-          <div className="order-2 lg:order-1">
+          <div className="intro-photo order-2 lg:order-1">
             <div className="relative mx-auto max-w-[360px] lg:mx-0">
               <div
                 aria-hidden="true"
@@ -59,7 +59,7 @@ export default function IntroSection() {
           </div>
 
           {/* Conteúdo */}
-          <div className="order-1 lg:order-2">
+          <div className="intro-content order-1 lg:order-2">
             <div className="mb-7 flex items-center gap-3">
               <span className="h-px w-10 bg-primary" />
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
@@ -67,8 +67,9 @@ export default function IntroSection() {
               </p>
             </div>
 
-            <h1 className="font-display text-5xl font-semibold tracking-[-0.045em] text-foreground sm:text-6xl lg:text-7xl xl:text-[5.4rem] xl:leading-[0.98]">
-              Pedro Leal
+            <h1 className="intro-name font-display text-5xl font-semibold tracking-[-0.045em] text-foreground sm:text-6xl lg:text-7xl xl:text-[5.4rem] xl:leading-[0.98]">
+              <span className="intro-first-name">Pedro</span>{" "}
+              <span className="intro-last-name">Leal</span>
             </h1>
 
             <p className="mt-5 max-w-3xl font-display text-2xl leading-tight tracking-[-0.025em] text-foreground/80 sm:text-3xl lg:text-[2.35rem]">
