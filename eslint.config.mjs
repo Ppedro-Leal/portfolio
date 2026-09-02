@@ -21,21 +21,6 @@ const eslintConfig = defineConfig([
     },
   },
 
-  {
-    files: ["postcss.config.js", "tailwind.config.js"],
-
-    languageOptions: {
-      sourceType: "commonjs",
-
-      globals: {
-        module: "readonly",
-        require: "readonly",
-        __dirname: "readonly",
-        process: "readonly",
-      },
-    },
-  },
-
   globalIgnores([
     ".next/**",
     "node_modules/**",
