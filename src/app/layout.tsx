@@ -34,24 +34,61 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: "Pedro Leal | Desenvolvedor Full Stack",
+  metadataBase: new URL("https://pedrohleal.vercel.app"),
+
+  title: {
+    default: "Pedro Leal | Desenvolvedor Full Stack",
+    template: "%s | Pedro Leal",
+  },
+
   description:
-    "Portfólio de Pedro Leal, Desenvolvedor Full Stack com foco em React, Next.js, Node.js e TypeScript.",
+    "Portfólio de Pedro Leal, desenvolvedor Full Stack com foco em React, Next.js, Node.js, TypeScript e desenvolvimento de aplicações web.",
+
   keywords: [
     "Pedro Leal",
     "Desenvolvedor Full Stack",
-    "React",
+    "Desenvolvedor React",
     "Next.js",
     "Node.js",
     "TypeScript",
+    "JavaScript",
+    "Desenvolvimento Web",
+    "Recife",
   ],
-  authors: [{ name: "Pedro Leal" }],
+
+  authors: [
+    {
+      name: "Pedro Leal",
+      url: "https://pedrohleal.vercel.app",
+    },
+  ],
+
+  creator: "Pedro Leal",
+
+  alternates: {
+    canonical: "/",
+  },
+
   openGraph: {
-    title: "Pedro Leal | Desenvolvedor Full Stack",
-    description:
-      "Desenvolvimento web com React, Next.js, Node.js e TypeScript.",
     type: "website",
     locale: "pt_BR",
+    url: "/",
+    siteName: "Pedro Leal",
+    title: "Pedro Leal | Desenvolvedor Full Stack",
+    description:
+      "Desenvolvedor Full Stack com foco em React, Next.js, Node.js e TypeScript.",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Pedro Leal | Desenvolvedor Full Stack",
+    description:
+      "Desenvolvedor Full Stack com foco em React, Next.js, Node.js e TypeScript.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
