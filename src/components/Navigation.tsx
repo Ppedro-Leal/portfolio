@@ -1,7 +1,8 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import VisualModeSwitcher from "@/components/visual-mode/VisualModeSwitcher";
 
 const navLinks = [
@@ -14,6 +15,20 @@ const navLinks = [
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
@@ -24,7 +39,10 @@ export default function Navigation() {
           Pedro Leal
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav
+          className="hidden items-center gap-8 md:flex"
+          aria-label="Navegação principal"
+        >
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -35,28 +53,29 @@ export default function Navigation() {
             </a>
           ))}
 
-          <div className="ml-2 flex items-center gap-4 border-l border-border pl-6">
+          <div className="ml-2 flex items-center border-l border-border pl-6">
             <VisualModeSwitcher />
-
-            <span className="text-xs font-semibold text-muted-foreground">
-              PT
-            </span>
           </div>
         </nav>
 
         <button
           type="button"
           onClick={() => setIsOpen((current) => !current)}
-          className="inline-flex h-10 w-10 items-center justify-center border border-border md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center border border-border md:hidden"
           aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={isOpen}
+          aria-controls="menu-mobile"
         >
           {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
       {isOpen && (
-        <nav className="border-t border-border bg-background px-6 py-6 md:hidden">
+        <nav
+          id="menu-mobile"
+          className="border-t border-border bg-background px-6 py-6 md:hidden"
+          aria-label="Navegação mobile"
+        >
           <div className="mx-auto flex max-w-7xl flex-col gap-5">
             {navLinks.map((link) => (
               <a
@@ -68,11 +87,10 @@ export default function Navigation() {
                 {link.label}
               </a>
             ))}
-            <VisualModeSwitcher />
 
-            <span className="mt-2 text-xs font-semibold text-muted-foreground">
-              PT
-            </span>
+            <div className="pt-2">
+              <VisualModeSwitcher />
+            </div>
           </div>
         </nav>
       )}

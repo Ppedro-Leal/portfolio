@@ -65,6 +65,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${sora.variable} ${oswald.variable} ${bricolage.variable} min-h-screen antialiased`}
       >
+        <a href="#conteudo-principal" className="skip-link">
+          Pular para o conteúdo
+        </a>
         <VisualModeProvider>
           {children}
           <VisualTransition />

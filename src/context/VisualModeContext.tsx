@@ -73,6 +73,20 @@ export function VisualModeProvider({ children }: { children: ReactNode }) {
         return;
       }
 
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      if (prefersReducedMotion) {
+        clearTimers();
+
+        setPendingMode(null);
+        setTransitionPhase("idle");
+        setMode(nextMode);
+
+        return;
+      }
+
       clearTimers();
 
       setPendingMode(nextMode);

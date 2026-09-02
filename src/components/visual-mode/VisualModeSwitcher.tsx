@@ -1,36 +1,21 @@
 "use client";
 
 import { useVisualMode } from "@/context/VisualModeContext";
-import {
-  VISUAL_MODES,
-  type VisualMode,
-} from "@/types/visual-mode";
+import { VISUAL_MODES, type VisualMode } from "@/types/visual-mode";
 
-function getRandomMode(
-  currentMode: VisualMode
-): VisualMode {
-  const availableModes =
-    VISUAL_MODES.filter(
-      (mode) => mode !== currentMode
-    );
+function getRandomMode(currentMode: VisualMode): VisualMode {
+  const availableModes = VISUAL_MODES.filter((mode) => mode !== currentMode);
 
-  const randomIndex = Math.floor(
-    Math.random() * availableModes.length
-  );
+  const randomIndex = Math.floor(Math.random() * availableModes.length);
 
   return availableModes[randomIndex];
 }
 
 export default function VisualModeSwitcher() {
-  const {
-    mode,
-    isTransitioning,
-    requestMode,
-  } = useVisualMode();
+  const { mode, isTransitioning, requestMode } = useVisualMode();
 
   function handleModeChange() {
-    const nextMode =
-      getRandomMode(mode);
+    const nextMode = getRandomMode(mode);
 
     requestMode(nextMode);
   }
@@ -41,9 +26,10 @@ export default function VisualModeSwitcher() {
       onClick={handleModeChange}
       disabled={isTransitioning}
       aria-label="Alterar modo visual"
+      title="Alterar estilo visual"
       className="
         group
-        flex h-9 w-9
+        flex h-11 w-11
         items-center justify-center
         border border-border
         text-foreground
@@ -51,7 +37,7 @@ export default function VisualModeSwitcher() {
         hover:border-primary
         disabled:cursor-default
         disabled:opacity-60
-      "
+        "
     >
       <span
         className="

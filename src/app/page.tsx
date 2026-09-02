@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <Navigation />
 
-      <main>
+      <main id="conteudo-principal">
         <IntroSection />
         <ProjectsSection />
         <ExperienceSection />
