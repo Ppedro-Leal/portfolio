@@ -1,0 +1,944 @@
+/* =========================================================
+   REALIDADE 03 — ILLUSTRATED
+   Cartoon/cel-shading, contornos fortes, painéis quebrados
+   e paleta colorida sem neon agressivo.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Tokens
+   --------------------------------------------------------- */
+
+html[data-visual-mode="illustrated"] {
+  --background: 42 48% 91%;
+  --foreground: 218 26% 12%;
+
+  --card: 43 44% 94%;
+  --card-foreground: 218 26% 12%;
+
+  --popover: 43 44% 94%;
+  --popover-foreground: 218 26% 12%;
+
+  --primary: 199 58% 64%;
+  --primary-foreground: 218 26% 12%;
+
+  --secondary: 163 34% 39%;
+  --secondary-foreground: 42 48% 94%;
+
+  --muted: 42 26% 84%;
+  --muted-foreground: 218 11% 38%;
+
+  --accent: 39 60% 58%;
+  --accent-foreground: 218 26% 12%;
+
+  --border: 218 26% 12%;
+  --input: 218 26% 12%;
+  --ring: 199 58% 50%;
+}
+
+/* ---------------------------------------------------------
+   Base gráfica
+   --------------------------------------------------------- */
+
+html[data-visual-mode="illustrated"] body {
+  position: relative;
+  isolation: isolate;
+
+  background:
+    radial-gradient(
+      circle at 12% 18%,
+      rgba(124, 190, 221, 0.34),
+      transparent 22%
+    ),
+    radial-gradient(
+      circle at 82% 22%,
+      rgba(213, 163, 77, 0.24),
+      transparent 19%
+    ),
+    radial-gradient(
+      circle at 72% 82%,
+      rgba(61, 128, 102, 0.19),
+      transparent 23%
+    ),
+    linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.18),
+      transparent 42%
+    ),
+    hsl(var(--background));
+
+  color: hsl(var(--foreground));
+}
+
+/* Pontos de impressão / quadrinhos */
+html[data-visual-mode="illustrated"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(24, 33, 43, 0.16) 0 0.85px,
+      transparent 1px
+    ),
+    repeating-linear-gradient(
+      -20deg,
+      transparent 0,
+      transparent 27px,
+      rgba(24, 33, 43, 0.025) 28px,
+      transparent 29px
+    );
+
+  background-size:
+    9px 9px,
+    100% 100%;
+
+  opacity: 0.12;
+  mix-blend-mode: multiply;
+}
+
+/* Vinheta suave + imperfeição impressa */
+html[data-visual-mode="illustrated"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 52%,
+      rgba(24, 33, 43, 0.09) 100%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 119px,
+      rgba(24, 33, 43, 0.012) 120px,
+      transparent 121px
+    );
+
+  opacity: 0.75;
+}
+
+/* ---------------------------------------------------------
+   Tipografia
+   --------------------------------------------------------- */
+
+html[data-visual-mode="illustrated"] .font-display {
+  font-family: var(--font-bricolage), sans-serif;
+}
+
+html[data-visual-mode="illustrated"] h1,
+html[data-visual-mode="illustrated"] h2,
+html[data-visual-mode="illustrated"] h3 {
+  font-family: var(--font-bricolage), sans-serif;
+}
+
+html[data-visual-mode="illustrated"] .intro-name {
+  position: relative;
+  display: inline-block;
+
+  font-size: clamp(4.6rem, 8.5vw, 8.5rem);
+  line-height: 0.82;
+  letter-spacing: -0.06em;
+
+  transform: rotate(-1deg);
+
+  text-shadow:
+    5px 5px 0 hsl(var(--primary)),
+    9px 9px 0 hsl(var(--foreground));
+}
+
+html[data-visual-mode="illustrated"] .intro-first-name,
+html[data-visual-mode="illustrated"] .intro-last-name {
+  display: block;
+}
+
+html[data-visual-mode="illustrated"] .intro-last-name {
+  transform: translateX(1.1rem);
+}
+
+html[data-visual-mode="illustrated"] .intro-name::after {
+  content: "";
+  position: absolute;
+
+  left: -2%;
+  right: -9%;
+  bottom: -0.4rem;
+
+  height: 10px;
+
+  background: hsl(var(--accent));
+
+  border: 3px solid hsl(var(--foreground));
+
+  transform: rotate(-2deg);
+  z-index: -1;
+}
+
+/* ---------------------------------------------------------
+   Navegação
+   --------------------------------------------------------- */
+
+html[data-visual-mode="illustrated"] header {
+  background: rgba(243, 232, 208, 0.90);
+  border-bottom: 3px solid hsl(var(--foreground));
+  backdrop-filter: blur(8px);
+
+  box-shadow: 0 5px 0 hsl(var(--primary));
+}
+
+html[data-visual-mode="illustrated"] header a {
+  font-weight: 700;
+}
+
+html[data-visual-mode="illustrated"] header button {
+  border-width: 2px;
+
+  box-shadow:
+    2px 2px 0 hsl(var(--foreground));
+
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+html[data-visual-mode="illustrated"] header button:hover {
+  transform: translate(-1px, -1px);
+
+  box-shadow:
+    4px 4px 0 hsl(var(--foreground));
+}
+
+/* ---------------------------------------------------------
+   Abertura
+   --------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  html[data-visual-mode="illustrated"] .intro-grid {
+    grid-template-columns: 42% 58%;
+    gap: 4rem;
+  }
+
+  html[data-visual-mode="illustrated"] .intro-content {
+    transform:
+      translateY(-0.8rem)
+      rotate(0.35deg);
+  }
+}
+
+html[data-visual-mode="illustrated"] .intro-photo {
+  position: relative;
+
+  transform:
+    translateX(-0.8rem)
+    rotate(1.15deg);
+}
+
+/* Blocos chapados atrás da foto */
+html[data-visual-mode="illustrated"] .intro-photo::before {
+  content: "";
+  position: absolute;
+
+  z-index: -2;
+
+  inset: -14% -30% -12% -26%;
+
+  background:
+    linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0 34%,
+      transparent 34% 41%,
+      hsl(var(--accent)) 41% 62%,
+      transparent 62% 68%,
+      hsl(var(--secondary)) 68% 100%
+    );
+
+  border: 4px solid hsl(var(--foreground));
+
+  clip-path: polygon(
+    4% 9%,
+    89% 0,
+    100% 23%,
+    93% 91%,
+    67% 100%,
+    0 88%
+  );
+
+  transform: rotate(-2.6deg);
+
+  box-shadow:
+    10px 10px 0 hsl(var(--foreground));
+}
+
+/* Riscos / hatching cartoon */
+html[data-visual-mode="illustrated"] .intro-photo::after {
+  content: "";
+  position: absolute;
+
+  z-index: 4;
+
+  inset: -5% -7% 4% -5%;
+
+  pointer-events: none;
+
+  background:
+    repeating-linear-gradient(
+      17deg,
+      transparent 0,
+      transparent 12px,
+      rgba(24, 33, 43, 0.15) 13px,
+      transparent 15px
+    ),
+    radial-gradient(
+      circle,
+      rgba(24, 33, 43, 0.20) 0 0.9px,
+      transparent 1.1px
+    );
+
+  background-size:
+    auto,
+    10px 10px;
+
+  clip-path: polygon(0 4%, 97% 0, 100% 95%, 6% 100%);
+
+  mix-blend-mode: multiply;
+  opacity: 0.58;
+}
+
+html[data-visual-mode="illustrated"] .intro-photo img {
+  filter:
+    saturate(1.22)
+    contrast(1.20)
+    brightness(1.02);
+}
+
+/* Moldura traseira */
+html[data-visual-mode="illustrated"] .intro-photo > div > div:first-child {
+  background: hsl(var(--primary));
+
+  border: 4px solid hsl(var(--foreground));
+
+  transform:
+    translate(18px, 15px)
+    rotate(-2.5deg);
+
+  box-shadow:
+    8px 8px 0 hsl(var(--foreground));
+}
+
+/* Foto como painel */
+html[data-visual-mode="illustrated"] .intro-photo > div > div:nth-child(2) {
+  position: relative;
+
+  overflow: hidden;
+
+  border: 4px solid hsl(var(--foreground));
+
+  clip-path: polygon(
+    2% 0,
+    98% 2%,
+    100% 95%,
+    94% 100%,
+    1% 97%
+  );
+
+  transform: rotate(0.8deg);
+
+  box-shadow:
+    7px 7px 0 hsl(var(--accent)),
+    12px 12px 0 hsl(var(--foreground));
+}
+
+/* Cel-shading / tinta sobre a fotografia */
+html[data-visual-mode="illustrated"] .intro-photo > div > div:nth-child(2)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      111deg,
+      rgba(24, 33, 43, 0.42) 0 18%,
+      transparent 18% 58%,
+      rgba(124, 190, 221, 0.12) 58% 74%,
+      transparent 74%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 0 65%,
+      rgba(24, 33, 43, 0.20) 65% 100%
+    );
+
+  mix-blend-mode: multiply;
+}
+
+/* ---------------------------------------------------------
+   Seções — painéis de quadrinhos coloridos
+   --------------------------------------------------------- */
+
+html[data-visual-mode="illustrated"] #projetos,
+html[data-visual-mode="illustrated"] #experiencia,
+html[data-visual-mode="illustrated"] #tecnologias,
+html[data-visual-mode="illustrated"] #formacao,
+html[data-visual-mode="illustrated"] #sobre {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  border-top: 4px solid hsl(var(--foreground));
+}
+
+html[data-visual-mode="illustrated"] #projetos > div,
+html[data-visual-mode="illustrated"] #experiencia > div,
+html[data-visual-mode="illustrated"] #tecnologias > div,
+html[data-visual-mode="illustrated"] #formacao > div,
+html[data-visual-mode="illustrated"] #sobre > div {
+  position: relative;
+  z-index: 2;
+}
+
+html[data-visual-mode="illustrated"] #projetos {
+  background:
+    linear-gradient(
+      155deg,
+      rgba(124, 190, 221, 0.28),
+      transparent 48%
+    ),
+    hsl(42 48% 92%);
+}
+
+html[data-visual-mode="illustrated"] #experiencia {
+  background:
+    linear-gradient(
+      200deg,
+      rgba(61, 128, 102, 0.16),
+      transparent 46%
+    ),
+    hsl(44 42% 90%);
+}
+
+html[data-visual-mode="illustrated"] #tecnologias {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(213, 163, 77, 0.18),
+      transparent 44%
+    ),
+    hsl(199 45% 89%);
+}
+
+html[data-visual-mode="illustrated"] #formacao {
+  background:
+    linear-gradient(
+      190deg,
+      rgba(124, 190, 221, 0.18),
+      transparent 38%
+    ),
+    hsl(42 48% 91%);
+}
+
+html[data-visual-mode="illustrated"] #sobre {
+  background:
+    linear-gradient(
+      155deg,
+      rgba(61, 128, 102, 0.16),
+      transparent 40%
+    ),
+    hsl(42 45% 90%);
+}
+
+/* Formas grandes / diagonais ao fundo */
+html[data-visual-mode="illustrated"] #projetos::before,
+html[data-visual-mode="illustrated"] #experiencia::before,
+html[data-visual-mode="illustrated"] #tecnologias::before,
+html[data-visual-mode="illustrated"] #formacao::before,
+html[data-visual-mode="illustrated"] #sobre::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+
+  width: 52vw;
+  height: 68%;
+
+  right: -13vw;
+  top: 14%;
+
+  border: 4px solid hsl(var(--foreground));
+
+  background:
+    repeating-linear-gradient(
+      -18deg,
+      transparent 0,
+      transparent 14px,
+      rgba(24, 33, 43, 0.10) 15px,
+      transparent 17px
+    );
+
+  clip-path: polygon(
+    10% 0,
+    100% 18%,
+    87% 100%,
+    0 78%
+  );
+
+  opacity: 0.45;
+  transform: rotate(-5deg);
+}
+
+html[data-visual-mode="illustrated"] #experiencia::before,
+html[data-visual-mode="illustrated"] #formacao::before {
+  right: auto;
+  left: -16vw;
+
+  transform: rotate(6deg);
+}
+
+/* Linha editorial grossa dos títulos */
+html[data-visual-mode="illustrated"] section:not(#contato) h2 {
+  position: relative;
+
+  width: fit-content;
+
+  transform: rotate(-0.7deg);
+
+  text-shadow:
+    3px 3px 0 hsl(var(--primary));
+}
+
+html[data-visual-mode="illustrated"] section:not(#contato) h2::after {
+  content: "";
+
+  position: absolute;
+
+  left: calc(100% + 18px);
+  top: 54%;
+
+  width: clamp(55px, 9vw, 170px);
+  height: 7px;
+
+  background: hsl(var(--accent));
+
+  border: 2px solid hsl(var(--foreground));
+
+  transform: rotate(-2deg);
+}
+
+/* ---------------------------------------------------------
+   Projetos
+   --------------------------------------------------------- */
+
+html[data-visual-mode="illustrated"] .project-row {
+  position: relative;
+
+  margin-block: 1rem;
+
+  padding-inline: 1.1rem;
+
+  background: hsl(var(--card));
+
+  border: 4px solid hsl(var(--foreground));
+
+  box-shadow:
+    8px 8px 0 hsl(var(--foreground));
+
+  transition:
+    transform 170ms ease,
+    box-shadow 170ms ease;
+}
+
+html[data-visual-mode="illustrated"] .project-row:nth-of-type(odd) {
+  transform: rotate(-0.7deg);
+
+  clip-path: polygon(
+    1% 3%,
+    99% 0,
+    100% 95%,
+    97% 100%,
+    0 98%
+  );
+}
+
+html[data-visual-mode="illustrated"] .project-row:nth-of-type(even) {
+  transform:
+    translateX(1.2rem)
+    rotate(0.8deg);
+
+  clip-path: polygon(
+    0 0,
+    98% 2%,
+    100% 97%,
+    2% 100%
+  );
+}
+
+html[data-visual-mode="illustrated"] .project-row:hover {
+  box-shadow:
+    12px 12px 0 hsl(var(--foreground));
+}
+
+html[data-visual-mode="illustrated"] .project-row:nth-of-type(odd):hover {
+  transform:
+    translate(-3px, -3px)
+    rotate(-1deg);
+}
+
+html[data-visual-mode="illustrated"] .project-row:nth-of-type(even):hover {
+  transform:
+    translate(calc(1.2rem - 3px), -3px)
+    rotate(0.55deg);
+}
+
+html[data-visual-mode="illustrated"] .project-row::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 8px;
+  height: 100%;
+
+  background: hsl(var(--primary));
+
+  border-right: 3px solid hsl(var(--foreground));
+}
+
+html[data-visual-mode="illustrated"] .project-row > span:first-child {
+  font-family: var(--font-bricolage), sans-serif;
+
+  font-size: clamp(4rem, 7vw, 7rem);
+  line-height: 0.8;
+  letter-spacing: -0.07em;
+
+  color: hsl(var(--primary));
+
+  -webkit-text-stroke:
+    2px
+    hsl(var(--foreground));
+
+  transform: rotate(-2deg);
+
+  text-shadow:
+    4px 4px 0 hsl(var(--accent));
+}
+
+html[data-visual-mode="illustrated"] #projetos article span.border {
+  background: hsl(var(--background));
+
+  border: 2px solid hsl(var(--foreground));
+
+  box-shadow:
+    2px 2px 0 hsl(var(--foreground));
+}
+
+/* ---------------------------------------------------------
+   Experiência
+   --------------------------------------------------------- */
+
+html[data-visual-mode="illustrated"] #experiencia h3 {
+  font-size: clamp(2rem, 3vw, 3.15rem);
+  line-height: 0.98;
+
+  text-shadow:
+    3px 3px 0 hsl(var(--primary));
+}
+
+html[data-visual-mode="illustrated"] #experiencia article {
+  position: relative;
+
+  margin-block: 1rem;
+
+  border: 3px solid hsl(var(--foreground));
+
+  background:
+    linear-gradient(
+      105deg,
+      hsl(var(--card)) 0 36%,
+      rgba(124, 190, 221, 0.10) 36% 100%
+    );
+
+  box-shadow:
+    7px 7px 0 hsl(var(--foreground));
+
+  transform: rotate(-0.25deg);
+}
+
+@media (min-width: 1024px) {
+  html[data-visual-mode="illustrated"] #experiencia article::after {
+    content: "";
+
+    position: absolute;
+
+    left: 36.5%;
+    top: 8%;
+    bottom: 8%;
+
+    width: 3px;
+
+    background: hsl(var(--foreground));
+
+    transform: rotate(0.7deg);
+  }
+
+  html[data-visual-mode="illustrated"] #experiencia article:nth-of-type(even) {
+    transform:
+      translateX(0.75rem)
+      rotate(0.35deg);
+  }
+}
+
+html[data-visual-mode="illustrated"] #experiencia span.border {
+  background: hsl(var(--background));
+
+  border: 2px solid hsl(var(--foreground));
+
+  box-shadow:
+    2px 2px 0 hsl(var(--foreground));
+}
+
+/* ---------------------------------------------------------
+   Tecnologias
+   --------------------------------------------------------- */
+
+html[data-visual-mode="illustrated"] .main-skill {
+  display: inline-block;
+
+  font-family: var(--font-bricolage), sans-serif;
+
+  font-size: clamp(2rem, 3.4vw, 3.8rem);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+
+  color: hsl(var(--foreground));
+
+  text-shadow:
+    3px 3px 0 hsl(var(--primary));
+}
+
+html[data-visual-mode="illustrated"] .main-skill:nth-child(3n + 2) {
+  transform:
+    translateY(0.28rem)
+    rotate(-1deg);
+
+  text-shadow:
+    3px 3px 0 hsl(var(--accent));
+}
+
+html[data-visual-mode="illustrated"] .main-skill:nth-child(3n) {
+  transform: rotate(0.9deg);
+
+  text-shadow:
+    3px 3px 0 hsl(var(--secondary));
+}
+
+html[data-visual-mode="illustrated"] #tecnologias span.border {
+  background: hsl(var(--card));
+
+  border: 2px solid hsl(var(--foreground));
+
+  box-shadow:
+    2px 2px 0 hsl(var(--foreground));
+}
+
+/* ---------------------------------------------------------
+   Formação
+   --------------------------------------------------------- */
+
+html[data-visual-mode="illustrated"] #formacao article {
+  position: relative;
+
+  background: hsl(var(--card));
+
+  border: 3px solid hsl(var(--foreground));
+
+  box-shadow:
+    6px 6px 0 hsl(var(--foreground));
+
+  transition:
+    transform 170ms ease,
+    box-shadow 170ms ease;
+}
+
+html[data-visual-mode="illustrated"] #formacao article:nth-of-type(odd) {
+  transform: rotate(-0.6deg);
+}
+
+html[data-visual-mode="illustrated"] #formacao article:nth-of-type(even) {
+  transform:
+    translateY(0.45rem)
+    rotate(0.7deg);
+}
+
+html[data-visual-mode="illustrated"] #formacao article:hover {
+  box-shadow:
+    10px 10px 0 hsl(var(--foreground));
+}
+
+/* ---------------------------------------------------------
+   Sobre
+   --------------------------------------------------------- */
+
+html[data-visual-mode="illustrated"] .about-highlight {
+  position: relative;
+
+  max-width: 45rem;
+
+  font-family: var(--font-bricolage), sans-serif;
+
+  font-size: clamp(1.1rem, 1.8vw, 1.55rem);
+  line-height: 1.35;
+
+  border-left:
+    6px
+    solid
+    hsl(var(--foreground));
+
+  background: hsl(var(--accent));
+
+  padding:
+    1rem
+    1.25rem;
+
+  box-shadow:
+    6px 6px 0 hsl(var(--foreground));
+
+  transform: rotate(-0.75deg);
+}
+
+html[data-visual-mode="illustrated"] .about-highlight::after {
+  content: "";
+
+  position: absolute;
+
+  right: -20px;
+  top: -17px;
+
+  width: 48px;
+  height: 48px;
+
+  background: hsl(var(--primary));
+
+  border: 3px solid hsl(var(--foreground));
+
+  transform: rotate(12deg);
+
+  z-index: -1;
+}
+
+/* ---------------------------------------------------------
+   Contato
+   --------------------------------------------------------- */
+
+html[data-visual-mode="illustrated"] #contato {
+  position: relative;
+  overflow: hidden;
+
+  border-top:
+    5px
+    solid
+    hsl(var(--foreground));
+
+  background: hsl(var(--secondary));
+
+  color: hsl(var(--secondary-foreground));
+
+  clip-path: polygon(
+    0 1.1rem,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+}
+
+html[data-visual-mode="illustrated"] #contato::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.18) 0 0.9px,
+      transparent 1.1px
+    ),
+    repeating-linear-gradient(
+      -18deg,
+      transparent 0,
+      transparent 24px,
+      rgba(24, 33, 43, 0.06) 25px,
+      transparent 27px
+    );
+
+  background-size:
+    10px 10px,
+    100% 100%;
+
+  opacity: 0.38;
+}
+
+html[data-visual-mode="illustrated"] #contato > div {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-visual-mode="illustrated"] #contato a {
+  border-width: 2px;
+}
+
+/* ---------------------------------------------------------
+   Responsividade
+   --------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  html[data-visual-mode="illustrated"] .intro-name {
+    font-size: clamp(4rem, 14vw, 7rem);
+  }
+
+  html[data-visual-mode="illustrated"] .intro-photo {
+    transform: none;
+  }
+
+  html[data-visual-mode="illustrated"] .project-row:nth-of-type(odd),
+  html[data-visual-mode="illustrated"] .project-row:nth-of-type(even) {
+    transform: none;
+    margin-inline: 0;
+  }
+
+  html[data-visual-mode="illustrated"] #experiencia article,
+  html[data-visual-mode="illustrated"] #experiencia article:nth-of-type(even) {
+    transform: none;
+  }
+}
+
+@media (max-width: 767px) {
+  html[data-visual-mode="illustrated"] section h2::after {
+    display: none;
+  }
+
+  html[data-visual-mode="illustrated"] .project-row:hover,
+  html[data-visual-mode="illustrated"] .project-row:nth-of-type(odd):hover,
+  html[data-visual-mode="illustrated"] .project-row:nth-of-type(even):hover {
+    transform: none;
+  }
+
+  html[data-visual-mode="illustrated"] #contato {
+    clip-path: polygon(
+      0 0.5rem,
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+  }
+}
