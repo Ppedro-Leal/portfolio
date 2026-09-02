@@ -1,10 +1,4 @@
-import {
-  ArrowUpRight,
-  Download,
-  Github,
-  Linkedin,
-  Mail,
-} from "lucide-react";
+import { ArrowUpRight, Download, Github, Linkedin, Mail } from "lucide-react";
 
 const links = [
   {
@@ -51,8 +45,7 @@ export default function ContactSection() {
 
             <p className="mt-7 max-w-lg leading-7 text-primary-foreground/75">
               Estou aberto a oportunidades em desenvolvimento Full Stack,
-              Front-End com React e Next.js e Back-End com Node.js e
-              TypeScript.
+              Front-End com React e Next.js e Back-End com Node.js e TypeScript.
             </p>
 
             <a
@@ -73,24 +66,22 @@ export default function ContactSection() {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={
-                  href.startsWith("http")
-                    ? "noopener noreferrer"
-                    : undefined
+                  href.startsWith("http") ? "noopener noreferrer" : undefined
                 }
                 className="group flex items-center justify-between gap-6 border-b border-primary-foreground/25 py-6 transition-all duration-200 hover:px-2"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex min-w-0 items-center gap-4">
                   <Icon
                     size={19}
-                    className="text-primary-foreground/65"
+                    className="shrink-0 text-primary-foreground/65"
                   />
 
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs uppercase tracking-[0.16em] text-primary-foreground/55">
                       {label}
                     </p>
 
-                    <p className="mt-1 text-sm font-medium sm:text-base">
+                    <p className="mt-1 text-sm font-medium [overflow-wrap:anywhere] sm:text-base">
                       {value}
                     </p>
                   </div>
@@ -98,7 +89,7 @@ export default function ContactSection() {
 
                 <ArrowUpRight
                   size={20}
-                  className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                  className="shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
                 />
               </a>
             ))}

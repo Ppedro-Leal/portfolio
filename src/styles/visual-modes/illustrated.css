@@ -1095,3 +1095,128 @@ html[data-visual-mode="illustrated"] footer > div {
     clip-path: polygon(0 0.5rem, 100% 0, 100% 100%, 0 100%);
   }
 }
+
+html[data-visual-mode="illustrated"] .intro-name {
+  font-size: clamp(3.45rem, 17vw, 4.5rem);
+
+  text-shadow:
+    3px 3px 0 hsl(var(--primary)),
+    6px 6px 0 hsl(var(--foreground));
+}
+
+html[data-visual-mode="illustrated"] .intro-last-name {
+  transform: translateX(0.5rem);
+}
+
+html[data-visual-mode="illustrated"] .intro-photo {
+  width: 100%;
+  max-width: 100%;
+
+  padding-inline: 0.75rem;
+
+  transform: none;
+}
+
+html[data-visual-mode="illustrated"] .intro-photo > div {
+  width: 100%;
+  max-width: 340px;
+
+  margin-inline: auto;
+}
+
+html[data-visual-mode="illustrated"] .intro-photo::before {
+  inset: -4% -2% -6% -2%;
+
+  border-width: 3px;
+
+  transform: rotate(2deg);
+
+  box-shadow: 5px 5px 0 hsl(var(--foreground));
+}
+
+html[data-visual-mode="illustrated"] .intro-photo > div > div:first-child {
+  transform: translate(7px, 6px) rotate(-1deg);
+
+  box-shadow: 3px 3px 0 hsl(var(--foreground));
+}
+
+html[data-visual-mode="illustrated"] .intro-photo > div > div:nth-child(2) {
+  transform: rotate(-1.25deg);
+
+  box-shadow:
+    3px 3px 0 hsl(var(--primary)),
+    6px 6px 0 hsl(var(--accent)),
+    9px 9px 0 hsl(var(--foreground));
+}
+
+html[data-visual-mode="illustrated"] #projetos article {
+  box-shadow:
+    3px 0 0 hsl(var(--primary)),
+    6px 5px 0 hsl(var(--foreground));
+}
+
+html[data-visual-mode="illustrated"] .project-row {
+  padding-inline: 0.85rem;
+
+  box-shadow: 5px 5px 0 hsl(var(--foreground));
+}
+
+html[data-visual-mode="illustrated"] #projetos article::after {
+  right: -5px;
+  width: 76px;
+}
+
+html[data-visual-mode="illustrated"] .about-highlight {
+  padding: 0.9rem 1rem;
+
+  border-left-width: 4px;
+
+  box-shadow: 4px 4px 0 hsl(var(--foreground));
+
+  transform: rotate(-0.35deg);
+}
+
+html[data-visual-mode="illustrated"] .about-highlight::after {
+  right: -7px;
+  top: -10px;
+
+  width: 34px;
+  height: 34px;
+
+  border-width: 2px;
+}
+
+html[data-visual-mode="illustrated"] #contato h2 {
+  font-size: clamp(2.75rem, 14vw, 3.6rem);
+  line-height: 0.92;
+
+  text-shadow: 3px 3px 0 hsl(var(--foreground));
+}
+
+html[data-visual-mode="illustrated"] #contato::after {
+  right: -7rem;
+  top: -4rem;
+
+  width: 15rem;
+  height: 15rem;
+
+  border-width: 3px;
+
+  box-shadow: 5px 5px 0 hsl(var(--foreground));
+
+  opacity: 0.62;
+}
+
+html[data-visual-mode="illustrated"] #contato a,
+html[data-visual-mode="illustrated"] #contato a:nth-child(even) {
+  transform: none;
+
+  padding: 0.95rem 1rem;
+
+  box-shadow: 4px 4px 0 hsl(var(--foreground));
+}
+
+html[data-visual-mode="illustrated"] #inicio {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
