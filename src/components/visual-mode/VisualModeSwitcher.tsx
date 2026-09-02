@@ -1,63 +1,89 @@
 "use client";
 
 import { useVisualMode } from "@/context/VisualModeContext";
-import type { VisualMode } from "@/types/visual-mode";
+import {
+  VISUAL_MODES,
+  type VisualMode,
+} from "@/types/visual-mode";
 
-const modes: {
-  id: VisualMode;
-  label: string;
-}[] = [
-  {
-    id: "base",
-    label: "01",
-  },
-  {
-    id: "noir",
-    label: "02",
-  },
-  {
-    id: "illustrated",
-    label: "03",
-  },
-];
+function getRandomMode(
+  currentMode: VisualMode
+): VisualMode {
+  const availableModes =
+    VISUAL_MODES.filter(
+      (mode) => mode !== currentMode
+    );
+
+  const randomIndex = Math.floor(
+    Math.random() * availableModes.length
+  );
+
+  return availableModes[randomIndex];
+}
 
 export default function VisualModeSwitcher() {
-  const { mode, pendingMode, isTransitioning, requestMode } = useVisualMode();
+  const {
+    mode,
+    isTransitioning,
+    requestMode,
+  } = useVisualMode();
+
+  function handleModeChange() {
+    const nextMode =
+      getRandomMode(mode);
+
+    requestMode(nextMode);
+  }
 
   return (
-    <div className="flex items-center gap-1" aria-label="Modo visual">
-      {modes.map((item) => {
-        const isActive = mode === item.id && !pendingMode;
+    <button
+      type="button"
+      onClick={handleModeChange}
+      disabled={isTransitioning}
+      aria-label="Alterar modo visual"
+      className="
+        group
+        flex h-9 w-9
+        items-center justify-center
+        border border-border
+        text-foreground
+        transition
+        hover:border-primary
+        disabled:cursor-default
+        disabled:opacity-60
+      "
+    >
+      <span
+        className="
+          relative
+          block h-4 w-4
+        "
+        aria-hidden="true"
+      >
+        <span
+          className="
+            absolute
+            left-0 top-0
+            h-2.5 w-2.5
+            border border-current
+          "
+        />
 
-        const isPending = pendingMode === item.id;
-
-        return (
-          <button
-            key={item.id}
-            type="button"
-            onClick={() => requestMode(item.id)}
-            aria-label={`Modo visual ${item.label}`}
-            aria-pressed={isActive || isPending}
-            disabled={isTransitioning}
-            className={`
-              flex h-8 min-w-8
-              items-center justify-center
-              border
-              text-[11px]
-              font-semibold
-              transition
-              disabled:cursor-default
-              ${
-                isActive || isPending
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border text-muted-foreground hover:border-primary hover:text-foreground"
-              }
-            `}
-          >
-            {item.label}
-          </button>
-        );
-      })}
-    </div>
+        <span
+          className="
+            absolute
+            bottom-0 right-0
+            h-2.5 w-2.5
+            border border-current
+            bg-background
+            transition-transform
+            group-hover:
+            -translate-y-px
+            group-hover:
+            translate-x-px
+          "
+        />
+      </span>
+    </button>
   );
 }

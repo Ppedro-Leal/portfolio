@@ -10,7 +10,7 @@ import {
   type ReactNode,
 } from "react";
 
-import type { VisualMode } from "@/types/visual-mode";
+import { VISUAL_MODES, type VisualMode } from "@/types/visual-mode";
 
 export type TransitionPhase = "idle" | "entering" | "switching" | "leaving";
 
@@ -27,8 +27,6 @@ const VisualModeContext = createContext<VisualModeContextValue | undefined>(
 );
 
 const STORAGE_KEY = "portfolio-visual-mode";
-
-const VALID_MODES: VisualMode[] = ["base", "noir", "illustrated"];
 
 export function VisualModeProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<VisualMode>("base");
@@ -48,7 +46,7 @@ export function VisualModeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const savedMode = localStorage.getItem(STORAGE_KEY);
 
-    if (savedMode && VALID_MODES.includes(savedMode as VisualMode)) {
+    if (savedMode && VISUAL_MODES.includes(savedMode as VisualMode)) {
       const restoredMode = savedMode as VisualMode;
 
       setMode(restoredMode);
