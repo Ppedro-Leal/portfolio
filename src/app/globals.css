@@ -2,141 +2,130 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* =========================================================
+   REALIDADE 01 — BASE
+   ========================================================= */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
+    --background: 44 31% 93%;
+    --foreground: 210 27% 13%;
 
-    --card: 0 0% 98%;
-    --card-foreground: 0 0% 10%;
+    --card: 43 24% 89%;
+    --card-foreground: 210 27% 13%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
+    --popover: 44 31% 93%;
+    --popover-foreground: 210 27% 13%;
 
-    --primary: 280 80% 65%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 150 34% 31%;
+    --primary-foreground: 44 31% 93%;
 
-    --secondary: 280 60% 50%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 202 52% 68%;
+    --secondary-foreground: 203 42% 42%;
 
-    --muted: 0 0% 95%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 43 24% 89%;
+    --muted-foreground: 210 9% 44%;
 
-    --accent: 280 70% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 202 52% 68%;
+    --accent-foreground: 210 27% 13%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 44 31% 93%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 280 80% 65%;
+    --border: 41 16% 80%;
+    --input: 41 16% 80%;
+    --ring: 150 34% 31%;
 
-    --radius: 0.75rem;
+    --radius: 0.25rem;
 
-    /* Custom portfolio colors */
-    --gradient-start: 0 0% 100%;
-    --gradient-end: 0 0% 95%;
-    
-    --card-glass: 0 0% 98% / 0.6;
-    
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 10%;
-    --sidebar-primary: 280 80% 65%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 95%;
-    --sidebar-accent-foreground: 0 0% 10%;
-    --sidebar-border: 0 0% 90%;
-    --sidebar-ring: 280 80% 65%;
+    --sidebar-background: 44 31% 93%;
+    --sidebar-foreground: 210 27% 13%;
+    --sidebar-primary: 150 34% 31%;
+    --sidebar-primary-foreground: 44 31% 93%;
+    --sidebar-accent: 43 24% 89%;
+    --sidebar-accent-foreground: 210 27% 13%;
+    --sidebar-border: 41 16% 80%;
+    --sidebar-ring: 150 34% 31%;
   }
 
-  .dark {
-    --background: 0 0% 8%;
-    --foreground: 0 0% 98%;
-
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 280 80% 65%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 280 60% 50%;
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 70%;
-
-    --accent: 280 70% 60%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 25%;
-    --input: 0 0% 25%;
-    --ring: 280 80% 65%;
-
-    /* Custom portfolio colors */
-    --gradient-start: 0 0% 8%;
-    --gradient-end: 0 0% 18%;
-    
-    --card-glass: 0 0% 12% / 0.6;
-    
-    --sidebar-background: 0 0% 10%;
-    --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 280 80% 65%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 280 80% 65%;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
 
+  html,
   body {
-    @apply bg-gradient-to-br from-[hsl(var(--gradient-start))] to-[hsl(var(--gradient-end))] text-foreground min-h-screen;
-    background-attachment: fixed;
+    max-width: 100%;
   }
-  
-  /* Smooth scrolling */
+
   html {
     scroll-behavior: smooth;
   }
-  
-  /* Glass morphism effect */
-  .glass {
-    background: rgba(139, 92, 246, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(168, 85, 247, 0.2);
+
+  html {
+    scroll-padding-top: 6rem;
   }
-  
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 10px;
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter), sans-serif;
+    overflow-x: hidden;
   }
-  
-  ::-webkit-scrollbar-track {
-    background: hsl(var(--background));
+
+  ::selection {
+    background: hsl(var(--secondary));
+    color: hsl(var(--foreground));
   }
-  
-  ::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary));
-    border-radius: 5px;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 20000;
+
+  padding: 0.75rem 1rem;
+
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
+
+  border: 2px solid currentColor;
+
+  transform: translateY(-180%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+/* =========================================================
+   UTILITÁRIOS GERAIS
+   ========================================================= */
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-sora), sans-serif;
   }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--accent));
+}
+
+/* =========================================================
+   ACESSIBILIDADE / MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

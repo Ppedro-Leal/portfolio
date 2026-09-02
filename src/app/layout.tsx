@@ -1,28 +1,94 @@
-import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "sonner";
 
-const poppins = Poppins({ 
-  weight: ['400', '600', '700'],
+import "../styles/visual-modes/noir.css";
+import "../styles/visual-modes/illustrated.css";
+import "../styles/visual-modes/transition.css";
+
+import type { Metadata } from "next";
+import { Bricolage_Grotesque, Inter, Oswald, Sora } from "next/font/google";
+import { VisualModeProvider } from "@/context/VisualModeContext";
+import VisualTransition from "@/components/visual-mode/VisualTransition";
+
+const inter = Inter({
   subsets: ["latin"],
-  display: 'swap',
-  variable: '--font-poppins',
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const sora = Sora({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sora",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-oswald",
+});
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-bricolage",
 });
 
 export const metadata: Metadata = {
-  title: "Pedro Leal - Portfólio",
-  description: "Portfólio profissional de Pedro Leal - Desenvolvedor Full Stack",
-  keywords: ["Pedro Leal", "Desenvolvedor", "Full Stack", "Portfólio", "React", "Next.js"],
-  authors: [{ name: "Pedro Leal" }],
+  metadataBase: new URL("https://pedrohleal.vercel.app"),
+
+  title: {
+    default: "Pedro Leal | Desenvolvedor Full Stack",
+    template: "%s | Pedro Leal",
+  },
+
+  description:
+    "Portfólio de Pedro Leal, desenvolvedor Full Stack com foco em React, Next.js, Node.js, TypeScript e desenvolvimento de aplicações web.",
+
+  keywords: [
+    "Pedro Leal",
+    "Desenvolvedor Full Stack",
+    "Desenvolvedor React",
+    "Next.js",
+    "Node.js",
+    "TypeScript",
+    "JavaScript",
+    "Desenvolvimento Web",
+    "Recife",
+  ],
+
+  authors: [
+    {
+      name: "Pedro Leal",
+      url: "https://pedrohleal.vercel.app",
+    },
+  ],
+
+  creator: "Pedro Leal",
+
+  alternates: {
+    canonical: "/",
+  },
+
   openGraph: {
-    title: "Pedro Leal - Portfólio",
-    description: "Portfólio profissional de Pedro Leal",
     type: "website",
     locale: "pt_BR",
+    url: "/",
+    siteName: "Pedro Leal",
+    title: "Pedro Leal | Desenvolvedor Full Stack",
+    description:
+      "Desenvolvedor Full Stack com foco em React, Next.js, Node.js e TypeScript.",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Pedro Leal | Desenvolvedor Full Stack",
+    description:
+      "Desenvolvedor Full Stack com foco em React, Next.js, Node.js e TypeScript.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -32,23 +98,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
-      <body 
-        className={`${poppins.variable} font-sans antialiased`}
-        suppressHydrationWarning
+    <html lang="pt-BR">
+      <body
+        className={`${inter.variable} ${sora.variable} ${oswald.variable} ${bricolage.variable} min-h-screen antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TooltipProvider delayDuration={300}>
-            {children}
-            <Toaster />
-            <Sonner />
-          </TooltipProvider>
-        </ThemeProvider>
+        <a href="#conteudo-principal" className="skip-link">
+          Pular para o conteúdo
+        </a>
+        <VisualModeProvider>
+          {children}
+          <VisualTransition />
+        </VisualModeProvider>
       </body>
     </html>
   );
