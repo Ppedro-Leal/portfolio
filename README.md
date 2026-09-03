@@ -1,28 +1,38 @@
 # Pedro Leal — Portfólio
 
-Portfólio pessoal desenvolvido para apresentar minha experiência, projetos e atuação como Desenvolvedor Full Stack.
+Portfólio pessoal desenvolvido para apresentar minha experiência, projetos e atuação como **Desenvolvedor Full Stack**.
 
-A aplicação foi construída como uma experiência one-page e possui três interpretações visuais diferentes do mesmo conteúdo.
+A aplicação foi construída como uma experiência **one-page** e possui três interpretações visuais diferentes do mesmo conteúdo, mantendo a mesma estrutura, dados e navegação enquanto altera sua representação visual.
 
 ## Deploy
 
 https://pedrohleal.vercel.app
 
+## Preview
+
+<p align="center">
+  <img
+    src="docs\images\portfolio-modes.png"
+    alt="Prévia dos modos Base, Noir e Illustrated do portfólio de Pedro Leal"
+    width="1000"
+  >
+</p>
+
 ## Modos visuais
 
 ### Base
 
-Interface principal do portfólio, com uma linguagem profissional, limpa e objetiva.
+Interface principal do portfólio, com uma linguagem profissional, limpa e objetiva, priorizando legibilidade, organização e apresentação direta das informações.
 
 ### Noir
 
-Inspirada no spider noir tendo foco em ser monocromática com alto contraste, composição editorial, hatching, halftone e elementos inspirados em quadrinhos e impressão. 
+Interpretação monocromática com alto contraste, composição editorial, hatching, halftone, texturas de impressão e elementos inspirados na linguagem visual de quadrinhos.
 
 ### Illustrated
 
-Inspirada em borderlands, sendo mais expressiva, utilizando contornos fortes, cel shading, formas geométricas, texturas de impressão e uma paleta mais intensa. 
+Interpretação mais expressiva, utilizando contornos fortes, cel shading, formas geométricas, sobreposições, texturas de impressão e uma paleta mais intensa.
 
-Os três modos compartilham o mesmo conteúdo e estrutura da aplicação. A troca altera apenas sua representação visual.
+Os três modos compartilham o mesmo conteúdo e a mesma estrutura da aplicação. A troca altera apenas sua representação visual.
 
 ## Tecnologias
 
@@ -49,7 +59,7 @@ src/
 
 ### Sistema de modos visuais
 
-A troca dos modos é controlada por:
+A troca entre os modos é controlada por:
 
 - `VisualModeContext`
 - `VisualModeSwitcher`
@@ -63,6 +73,8 @@ src/styles/visual-modes/
 ├── illustrated.css
 └── transition.css
 ```
+
+Essa separação permite que os três modos compartilhem o mesmo conteúdo e componentes, reduzindo duplicação e mantendo cada identidade visual isolada.
 
 ## Seções
 
@@ -88,14 +100,32 @@ O projeto possui:
 - headers básicos de segurança
 - geração estática das páginas e metadados
 
+### Lighthouse
+
+Auditoria realizada na versão publicada do portfólio:
+
+| Categoria | Resultado |
+| --- | ---: |
+| Performance | 94 |
+| Accessibility | 96 |
+| Best Practices | 100 |
+| SEO | 100 |
+
 ## Executando localmente
+
+Instale as dependências:
 
 ```bash
 npm install
+```
+
+Execute o ambiente de desenvolvimento:
+
+```bash
 npm run dev
 ```
 
-Para executar todas as validações:
+Para executar todas as validações do projeto:
 
 ```bash
 npm run check
